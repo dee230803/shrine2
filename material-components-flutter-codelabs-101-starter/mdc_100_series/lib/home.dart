@@ -5,38 +5,26 @@
 // You may obtain a copy of the License at
 //
 // http://www.apache.org/licenses/LICENSE-2.0
-//
+// hehhehe
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-enum Category {
-  all,
-  accessories,
-  clothing,
-  home,
-}
+import 'package:flutter/material.dart';
 
-class Product {
-  const Product({
-    required this.category,
-    required this.id,
-    required this.isFeatured,
-    required this.name,
-    required this.price,
-  });
+import 'model/product.dart';
+import 'model/products_repository.dart';
+import 'supplemental/asymmetric_view.dart';
 
+class HomePage extends StatelessWidget {
   final Category category;
-  final int id;
-  final bool isFeatured;
-  final String name;
-  final int price;
 
-  String get assetName => '$id-0.jpg';
-  String get assetPackage => 'shrine_images';
+  const HomePage({this.category = Category.all, Key? key}) : super(key: key);
 
   @override
-  String toString() => "$name (id=$id)";
+  Widget build(BuildContext context) {
+    return AsymmetricView(products: ProductsRepository.loadProducts(category));
+  }
 }
